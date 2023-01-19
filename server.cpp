@@ -92,6 +92,10 @@ void communicateWithClient(int clientSocket, int clientID)
     {
       send(connectedClientSockets[i], sendBuffer, sizeof(sendBuffer), 0);
     }
+    if((i == clientID) && joinedClients[i])
+    {
+      send(connectedClientSockets[i], "You have joined the chat.", sizeof("You have joined the chat."), 0);
+    }
   }
 
   while(chatRunning)
