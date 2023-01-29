@@ -11,7 +11,7 @@
 #include <stdlib.h>
 
 #define PORT 5000
-#define MAX_CLIENTS 5
+#define MAX_CLIENTS 10
 
 int* connectedClientSockets;
 bool* joinedClients;
@@ -76,7 +76,7 @@ void moderator()
         if(joinedClients[i])
         {
           flag = 1;
-          std::cout << "\x1b[31m[" << ind << "]\x1b[0m " << clientNames[i] << std::endl;
+          std::cout << "\x1b[31m[" << ind << "]\x1b[0m " << "\x1b[33m"<<clientNames[i]<<"\x1b[0m" << std::endl;
           ind++;
         }
       }
@@ -95,25 +95,6 @@ void moderator()
           send(connectedClientSockets[i], leave, sizeof(leave), 0);
           std::cout << "\x1b[31m" << bannedClient << " has been banned.\x1b[0m" << std::endl;
           joinedClients[i] = false;
-          break;
-        }
-      }
-    }
-    else if(!strcmp(keyword, "timeout"))
-    {
-      char *timeoutClient = strtok(NULL, "|");
-      char *timeoutTime = strtok(NULL, "\0");
-      int timeoutTimeInt = atoi(timeoutTime);
-
-      char timeoutMessage[256] = "!timeout ";
-      strcat(timeoutMessage, timeoutTime);
-
-      for(int i = 0; i < MAX_CLIENTS; i++)
-      {
-        if(!strcmp(timeoutClient, clientNames[i]))
-        {
-          send(connectedClientSockets[i], timeoutMessage, sizeof(timeoutMessage), 0);
-          std::cout << "\x1b[31m" << timeoutClient << " has been timed out for " << timeoutTime << " seconds.\x1b[0m" << std::endl;
           break;
         }
       }
@@ -212,8 +193,7 @@ void communicateWithClient(int clientSocket, int clientID)
     }
   }
 
-  char clientNameCopy[256]; 
-  strcpy(clientNameCopy,clientName);
+  
 
   char leaveChat[] = "!leavechatroom";
 
@@ -245,6 +225,7 @@ void communicateWithClient(int clientSocket, int clientID)
       sprintf(sendBuffer, "\x1b[31mYou have left the chat.\x1b[0m");
       send(clientSocket, sendBuffer, sizeof(sendBuffer), 0);
       sprintf(sendBuffer, "\x1b[33m%s\x1b[0m \x1b[31mhas left the chat.\x1b[0m", clientName);
+      std::cout<<sendBuffer<<std::endl;
       for(int i = 0; i < MAX_CLIENTS; i++)
       {
         if((i != clientID) && joinedClients[i])
