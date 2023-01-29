@@ -66,14 +66,6 @@ void recieveFromServer(int clientSocket)
       std::cout << "\x1b[31mATTENTION: You have been banned from the chatroom \x1b[0m" << std::endl;
       return;
     }
-    if(!strcmp(strtok(recieveBufferCopy, " "), "!timeout"))
-    {
-      timedOut = true;
-      timedoutTime = atoi(strtok(NULL, "\0"));
-      std::cout << recieveBuffer << timedoutTime << std::endl;
-      std::cout << "\x1b[31mATTENTION: You have been timed out for " << timedoutTime << " seconds \x1b[0m" << std::endl;
-      continue;
-    }
     std::cout << recieveBuffer << std::endl;
     if(strcmp(recieveBuffer, closed) == 0)
     {
