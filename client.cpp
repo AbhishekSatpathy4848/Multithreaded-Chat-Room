@@ -62,9 +62,9 @@ void recieveFromServer(int clientSocket)
     strcpy(recieveBufferCopy, recieveBuffer);
     if(!strcmp(recieveBuffer, leave))
     {
-      chatRunning = false;
       std::cout << "\x1b[31mATTENTION: You have been banned from the chatroom \x1b[0m" << std::endl;
-      return;
+      chatRunning = false;
+      break;
     }
     std::cout << recieveBuffer << std::endl;
     if(strcmp(recieveBuffer, closed) == 0)

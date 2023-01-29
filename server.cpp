@@ -76,7 +76,7 @@ void moderator()
         if(joinedClients[i])
         {
           flag = 1;
-          std::cout << "\x1b[31m[" << ind << "]\x1b[0m " << clientNames[i] << std::endl;
+          std::cout << "\x1b[31m[" << ind << "]\x1b[0m " << "\x1b[33m"<<clientNames[i]<<"\x1b[0m" << std::endl;
           ind++;
         }
       }
@@ -224,9 +224,9 @@ void communicateWithClient(int clientSocket, int clientID)
     {
       joinedClients[clientID] = false;
       sprintf(sendBuffer, "\x1b[31mYou have left the chat.\x1b[0m");
-      std::cout<<sendBuffer<<std::endl;
       send(clientSocket, sendBuffer, sizeof(sendBuffer), 0);
       sprintf(sendBuffer, "\x1b[33m%s\x1b[0m \x1b[31mhas left the chat.\x1b[0m", clientNameCopy);
+      std::cout<<sendBuffer<<std::endl;
       for(int i = 0; i < MAX_CLIENTS; i++)
       {
         if((i != clientID) && joinedClients[i])
