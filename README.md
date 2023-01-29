@@ -1,3 +1,21 @@
 # Multithreaded-Chat-Room
 
-Building a chat room server capable of handling multiple clients using multithreading.
+Building a server to handle multiple clients using multithreading.
+
+## Teammates :
+1. Abhishek Satpathy, 211IT002
+2. Srinivasa R, 211IT070
+3. Vignaraj, 211IT080
+
+## Instructions to compile : 
+
+### Linux: 
+#### To compile server.cpp:
+> `g++ server.cpp -pthread -std=c++2a -o outputfilename`
+or
+> `g++ server.cpp -pthread -std=c++20 -o outputfilename`
+
+#### To compile client.cpp: 
+> `g++ client.cpp -pthread -std=c++2a -o outputfilename`
+or
+> `g++ client.cpp -pthread -std=c++20 -o outputfilename`
