@@ -1,6 +1,6 @@
 # Multithreaded-Chat-Room
 
-Building a server to handle multiple clients using multithreading.
+Building a chat room with a server to handle multiple clients using multithreading.
 
 ## Teammates :
 1. Abhishek Satpathy, 211IT002
