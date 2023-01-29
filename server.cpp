@@ -11,7 +11,7 @@
 #include <stdlib.h>
 
 #define PORT 5000
-#define MAX_CLIENTS 5
+#define MAX_CLIENTS 10
 
 int* connectedClientSockets;
 bool* joinedClients;
@@ -193,8 +193,7 @@ void communicateWithClient(int clientSocket, int clientID)
     }
   }
 
-  char clientNameCopy[256]; 
-  strcpy(clientNameCopy,clientName);
+  
 
   char leaveChat[] = "!leavechatroom";
 
@@ -225,7 +224,7 @@ void communicateWithClient(int clientSocket, int clientID)
       joinedClients[clientID] = false;
       sprintf(sendBuffer, "\x1b[31mYou have left the chat.\x1b[0m");
       send(clientSocket, sendBuffer, sizeof(sendBuffer), 0);
-      sprintf(sendBuffer, "\x1b[33m%s\x1b[0m \x1b[31mhas left the chat.\x1b[0m", clientNameCopy);
+      sprintf(sendBuffer, "\x1b[33m%s\x1b[0m \x1b[31mhas left the chat.\x1b[0m", clientName);
       std::cout<<sendBuffer<<std::endl;
       for(int i = 0; i < MAX_CLIENTS; i++)
       {
@@ -237,7 +236,7 @@ void communicateWithClient(int clientSocket, int clientID)
       return;
     }
 
-    sprintf(sendBuffer, "\x1b[33m%s:\x1b[0m\x1b[0m %s",clientNameCopy, recieveBuffer);
+    sprintf(sendBuffer, "\x1b[33m%s:\x1b[0m\x1b[0m %s",clientName, recieveBuffer);
     std::cout<<sendBuffer<<std::endl;
 
     for(int i = 0; i < MAX_CLIENTS; i++)
